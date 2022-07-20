@@ -91,9 +91,15 @@ async function test() {
   // include accepte une string pour une association ou un tableau pour plusieurs associations
   //   });
   //   console.log(firstQuestion);
+  console.clear();
+  const lists = await List.findAll({
+    include: [{
+      association: 'list_cart',
+      include: ['cart_status','cart_tag', 'cart_color']
+    }, 'list_tag', 'list_status', 'list_color']
+  });
 
-  const test = await Cart.findByPk(1);
-  console.log(test);
+  console.log(lists[0].toJSON());
 
 
 }

@@ -7,6 +7,7 @@
     "doc": "doc"
   },
   "scripts": {
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "createDB": "psql -U okanban -d okanban -f ./db/create_db.sql",
     "seedDB": "psql -U okanban -d okanban -f ./db/seed_db.sql"
