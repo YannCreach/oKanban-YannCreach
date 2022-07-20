@@ -1,0 +1,31 @@
+{
+  "name": "s06-okanban-yanncreach",
+  "version": "1.0.0",
+  "description": "## JOUR 2",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "createDB": "psql -U okanban -d okanban -f ./db/create_db.sql",
+    "seedDB": "psql -U okanban -d okanban -f ./db/seed_db.sql"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/O-clock-Flamel/S06-oKanban-YannCreach.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/O-clock-Flamel/S06-oKanban-YannCreach/issues"
+  },
+  "homepage": "https://github.com/O-clock-Flamel/S06-oKanban-YannCreach#readme",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "pg": "^8.7.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.21.3"
+  }
+}
