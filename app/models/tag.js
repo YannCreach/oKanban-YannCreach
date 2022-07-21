@@ -4,7 +4,7 @@ const sequelize = require('../database');
 class Tag extends Model {}
 
 Tag.init({
-  value: {
+  name: {
     type: DataTypes.TEXT
   },
 }, {

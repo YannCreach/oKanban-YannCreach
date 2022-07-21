@@ -21,6 +21,7 @@ List.init({
   status_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    defaultValue: '1',
     references: {
       model: Status,
       key: 'id',
@@ -38,6 +39,7 @@ List.init({
   color_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    defaultValue: '1',
     references: {
       model: Color,
       key: 'id',

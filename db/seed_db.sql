@@ -90,20 +90,20 @@ INSERT INTO "list_has_tag" ("list_id", "tag_id") VALUES
 
 
 /* FOREIGN KEYS */
-ALTER TABLE "utilisateur" ADD FOREIGN KEY ("role_id") REFERENCES "role" ("id");
-ALTER TABLE "cart_has_collab" ADD FOREIGN KEY ("utilisateur_id") REFERENCES "utilisateur" ("id");
-ALTER TABLE "cart_has_collab" ADD FOREIGN KEY ("cart_id") REFERENCES "cart" ("id");
-ALTER TABLE "cart_has_tag" ADD FOREIGN KEY ("tag_id") REFERENCES "tag" ("id");
-ALTER TABLE "cart_has_tag" ADD FOREIGN KEY ("cart_id") REFERENCES "cart" ("id");
-ALTER TABLE "kanban" ADD FOREIGN KEY ("owner_id") REFERENCES "utilisateur" ("id");
-ALTER TABLE "kanban_has_collab" ADD FOREIGN KEY ("kanban_id") REFERENCES "kanban" ("id");
-ALTER TABLE "kanban_has_collab" ADD FOREIGN KEY ("utilisateur_id") REFERENCES "utilisateur" ("id");
-ALTER TABLE "list" ADD FOREIGN KEY ("kanban_id") REFERENCES "kanban" ("id");
-ALTER TABLE "list" ADD FOREIGN KEY ("status_id") REFERENCES "status" ("id");
-ALTER TABLE "list" ADD FOREIGN KEY ("color_id") REFERENCES "color" ("id");
-ALTER TABLE "list_has_tag" ADD FOREIGN KEY ("list_id") REFERENCES "list" ("id");
-ALTER TABLE "list_has_tag" ADD FOREIGN KEY ("tag_id") REFERENCES "tag" ("id");
-ALTER TABLE "utilisateur" ADD FOREIGN KEY ("role_id") REFERENCES "role" ("id");
+ALTER TABLE "utilisateur" ADD FOREIGN KEY ("role_id") REFERENCES "role" ("id") ON DELETE CASCADE;
+ALTER TABLE "cart_has_collab" ADD FOREIGN KEY ("utilisateur_id") REFERENCES "utilisateur" ("id") ON DELETE CASCADE;
+ALTER TABLE "cart_has_collab" ADD FOREIGN KEY ("cart_id") REFERENCES "cart" ("id") ON DELETE CASCADE;
+ALTER TABLE "cart_has_tag" ADD FOREIGN KEY ("tag_id") REFERENCES "tag" ("id") ON DELETE CASCADE;
+ALTER TABLE "cart_has_tag" ADD FOREIGN KEY ("cart_id") REFERENCES "cart" ("id") ON DELETE CASCADE;
+ALTER TABLE "kanban" ADD FOREIGN KEY ("owner_id") REFERENCES "utilisateur" ("id") ON DELETE CASCADE;
+ALTER TABLE "kanban_has_collab" ADD FOREIGN KEY ("kanban_id") REFERENCES "kanban" ("id") ON DELETE CASCADE;
+ALTER TABLE "kanban_has_collab" ADD FOREIGN KEY ("utilisateur_id") REFERENCES "utilisateur" ("id") ON DELETE CASCADE;
+ALTER TABLE "list" ADD FOREIGN KEY ("kanban_id") REFERENCES "kanban" ("id") ON DELETE CASCADE;
+ALTER TABLE "list" ADD FOREIGN KEY ("status_id") REFERENCES "status" ("id") ON DELETE CASCADE;
+ALTER TABLE "list" ADD FOREIGN KEY ("color_id") REFERENCES "color" ("id") ON DELETE CASCADE;
+ALTER TABLE "list_has_tag" ADD FOREIGN KEY ("list_id") REFERENCES "list" ("id") ON DELETE CASCADE;
+ALTER TABLE "list_has_tag" ADD FOREIGN KEY ("tag_id") REFERENCES "tag" ("id") ON DELETE CASCADE;
+ALTER TABLE "utilisateur" ADD FOREIGN KEY ("role_id") REFERENCES "role" ("id") ON DELETE CASCADE;
 
 COMMIT;
 

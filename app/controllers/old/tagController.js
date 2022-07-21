@@ -65,11 +65,13 @@ const tagController = {
   },
 
   delete: async (req, res) => {
+    const tag_id = req.params.id;
+    const tagToDelete = await Tag.findByPk(tag_id);
+
     try {
-      const tag_id = req.params.id;
-      const tagToDelete = await Tag.findByPk(tag_id);
       await tagToDelete.destroy();
-      res.json(tagToDelete);
+
+      res.json({ status: 'ok' });
 
     } catch (error) {
       console.trace(error);

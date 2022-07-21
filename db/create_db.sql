@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS "cart" (
     "pinned" INTEGER NOT NULL DEFAULT 0,
     "list_id" INTEGER NOT NULL,
     "status_id" INTEGER NOT NULL DEFAULT 1,
-    "color_id" INTEGER NOT NULL DEFAULT 0,
+    "color_id" INTEGER NOT NULL DEFAULT 1,
     "created_at" TIMESTAMP with time zone NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMP with time zone NULL
   );
@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS "list" (
     "description" TEXT NULL,
     "position" INTEGER NOT NULL DEFAULT 0,
     "pinned" INTEGER NOT NULL DEFAULT 0,
-    "color_id" INTEGER NOT NULL DEFAULT 0,
+    "color_id" INTEGER NOT NULL DEFAULT 1,
     "created_at" TIMESTAMP with time zone NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMP with time zone NULL
   );

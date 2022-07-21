@@ -45,6 +45,7 @@ Kanban.belongsToMany(Utilisateur, {
   through: 'kanban_has_collab',
   foreignKey: 'kanban_id',
   otherKey: 'utilisateur_id',
+  timestamps: false
 });
 // un utilisateur peut etre collab sur plusieurs kanban
 Utilisateur.belongsToMany(Kanban, {
@@ -52,6 +53,7 @@ Utilisateur.belongsToMany(Kanban, {
   through: 'kanban_has_collab',
   otherKey: 'kanban_id',
   foreignKey: 'utilisateur_id',
+  timestamps: false
 });
 
 
@@ -133,6 +135,7 @@ Cart.belongsToMany(Utilisateur, {
   through: 'cart_has_collab',
   foreignKey: 'cart_id',
   otherKey: 'utilisateur_id',
+  timestamps: false
 });
 // un utilisateur peut etre collab sur plusieurs cartes
 Utilisateur.belongsToMany(Cart, {
@@ -140,6 +143,7 @@ Utilisateur.belongsToMany(Cart, {
   through: 'cart_has_collab',
   otherKey: 'cart_id',
   foreignKey: 'utilisateur_id',
+  timestamps: false
 });
 
 
@@ -149,6 +153,7 @@ List.belongsToMany(Tag, {
   through: 'list_has_tag',
   foreignKey: 'list_id',
   otherKey: 'tag_id',
+  timestamps: false
 });
 // un tag peut etre sur plusieurs listes
 Tag.belongsToMany(List, {
@@ -156,6 +161,7 @@ Tag.belongsToMany(List, {
   through: 'list_has_tag',
   otherKey: 'list_id',
   foreignKey: 'tag_id',
+  timestamps: false
 });
 
 
@@ -165,6 +171,7 @@ Cart.belongsToMany(Tag, {
   through: 'cart_has_tag',
   foreignKey: 'cart_id',
   otherKey: 'tag_id',
+  timestamps: false
 });
 // un tag peut etre sur plusieurs carte
 Tag.belongsToMany(Cart, {
@@ -172,6 +179,7 @@ Tag.belongsToMany(Cart, {
   through: 'cart_has_tag',
   otherKey: 'cart_id',
   foreignKey: 'tag_id',
+  timestamps: false
 });
 
 

@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/O-clock-Flamel/S06-oKanban-YannCreach#readme",
   "dependencies": {
+    "assert": "^2.0.0",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "pg": "^8.7.3",

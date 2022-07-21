@@ -1,4 +1,5 @@
 const { Cart } = require('../models');
+const assert = require('assert');
 
 const cartController = {
 
@@ -18,9 +19,17 @@ const cartController = {
 
   getOne: async (req, res) => {
     try {
-      const cart = await Cart.findByPk(req.params.id, {
+
+      const id = req.params.id;
+      assert.ok(Number(id), 'id is required and is a number');
+
+      const cart = await Cart.findByPk(id, {
         include: ['cart_tag', 'cart_color', 'cart_status']
       });
+
+      if(!cart) {
+        return res.status(404).json({});
+      }
 
       res.json(cart);
 
@@ -31,33 +40,28 @@ const cartController = {
   },
 
   update: async (req, res) => {
+
+    const id = req.params.id;
+    assert.ok(Number(id), 'id is required and is a number');
+
+    const { name, status_id, position, deadline, description, color_id, attachment, pinned } = req.body;
+
     try {
-      const id = req.params.id;
-      const name = req.body.name;
-      const status_id = req.body.status;
-      const position = req.body.position;
-      const deadline = req.body.deadline;
-      const description = req.body.description;
-      const color_id = req.body.color;
-      const attachment = req.body.attachment;
-      const pinned = req.body.pinned;
 
-      await Cart.update(
-        {
-          name,
-          status_id,
-          position,
-          deadline,
-          description,
-          color_id,
-          attachment,
-          pinned,
+      const cart = await Cart.findByPk(id);
 
-        },
-        { where: { id } }
-      );
+      if (name) cart.name = name;
+      if (status_id) cart.status_id = status_id;
+      if (position) cart.position = position;
+      if (deadline) cart.deadline = deadline;
+      if (description) cart.description = description;
+      if (color_id) cart.color_id = color_id;
+      if (attachment) cart.attachment = attachment;
+      if (pinned) cart.pinned = pinned;
 
-      res.json(await Cart.findByPk(id));
+      await cart.save();
+
+      res.json(cart);
 
     } catch (error) {
       console.trace(error);
@@ -66,21 +70,15 @@ const cartController = {
   },
 
   create: async (req, res) => {
-    const list_id = req.body.status;
-    const name = req.body.name;
-    const status_id = req.body.status;
-    const position = req.body.position;
-    const deadline = req.body.deadline;
-    const description = req.body.description;
-    const color_id = req.body.color;
-    const attachment = req.body.attachment;
-    const pinned = req.body.pinned;
+
+    const { list_id, name, status_id, position, deadline, description, color_id, attachment, pinned } = req.body;
+
+    assert.ok(list_id, 'list can\'t be empty');
+    assert.ok(name, 'name can\'t be empty');
 
     try {
       const newCart = await Cart.create({ list_id, name, status_id, position, deadline, description, color_id, attachment, pinned});
-
       res.json(newCart);
-
     } catch (error) {
       console.trace(error);
       res.status(500).json(error.toString());

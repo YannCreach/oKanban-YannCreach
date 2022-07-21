@@ -15,7 +15,8 @@ Cart.init({
     type: DataTypes.TEXT
   },
   position: {
-    type: DataTypes.INTEGER
+    type: DataTypes.INTEGER,
+    defaultValue: '0',
   },
   deadline: {
     type: DataTypes.TIME
@@ -24,7 +25,8 @@ Cart.init({
     type: DataTypes.TEXT
   },
   pinned: {
-    type: DataTypes.INTEGER
+    type: DataTypes.INTEGER,
+    defaultValue: '0',
   },
   list_id: {
     type: DataTypes.INTEGER,
@@ -37,6 +39,7 @@ Cart.init({
   status_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    defaultValue: '1',
     references: {
       model: Status,
       key: 'id',
@@ -45,6 +48,7 @@ Cart.init({
   color_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    defaultValue: '1',
     references: {
       model: Color,
       key: 'id',
