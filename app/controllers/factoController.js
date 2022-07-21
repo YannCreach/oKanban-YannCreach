@@ -30,7 +30,6 @@ const factoController = {
     const {sequelizeObject, includes} = entityDefinition.switcher(entity);
 
     try {
-
       const getOneByEntity = await sequelizeObject.findByPk(id, {
         include: includes
       });
@@ -51,7 +50,7 @@ const factoController = {
     const {sequelizeObject, columns} = entityDefinition.switcher(entity);
 
     try {
-
+      //todo rename entity to entityToUpdate
       const entity = await sequelizeObject.findByPk(id);
       assert.ok(entity, 'enter a valid id');
 
@@ -103,7 +102,7 @@ const factoController = {
       const entityToDelete = await sequelizeObject.findByPk(id);
       await entityToDelete.destroy();
 
-      res.json({ status: 'ok' });
+      res.json({ status: `${entity} > ${id} : correctly deleted` });
 
     } catch (error) {
       console.trace(error);
