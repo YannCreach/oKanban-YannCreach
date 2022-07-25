@@ -41,7 +41,7 @@ Kanban.belongsTo(Utilisateur, {
 
 // Un kanban possède plusieurs collab
 Kanban.belongsToMany(Utilisateur, {
-  as: 'kanban_collab',
+  as: 'collab',
   through: 'kanban_has_collab',
   foreignKey: 'kanban_id',
   otherKey: 'utilisateur_id',
@@ -131,7 +131,7 @@ Cart.belongsTo(Color, {
 
 // Une carte possède plusieurs collab
 Cart.belongsToMany(Utilisateur, {
-  as: 'cart_collab',
+  as: 'collab',
   through: 'cart_has_collab',
   foreignKey: 'cart_id',
   otherKey: 'utilisateur_id',
@@ -139,7 +139,7 @@ Cart.belongsToMany(Utilisateur, {
 });
 // un utilisateur peut etre collab sur plusieurs cartes
 Utilisateur.belongsToMany(Cart, {
-  as: 'collab_cart',
+  as: 'cart',
   through: 'cart_has_collab',
   otherKey: 'cart_id',
   foreignKey: 'utilisateur_id',
@@ -149,7 +149,7 @@ Utilisateur.belongsToMany(Cart, {
 
 // Une list possède plusieurs tags
 List.belongsToMany(Tag, {
-  as: 'list_tag',
+  as: 'tag',
   through: 'list_has_tag',
   foreignKey: 'list_id',
   otherKey: 'tag_id',
@@ -157,17 +157,17 @@ List.belongsToMany(Tag, {
 });
 // un tag peut etre sur plusieurs listes
 Tag.belongsToMany(List, {
-  as: 'tag_list',
+  as: 'list',
   through: 'list_has_tag',
-  otherKey: 'list_id',
   foreignKey: 'tag_id',
+  otherKey: 'list_id',
   timestamps: false
 });
 
 
 // Une carte possède plusieurs tags
 Cart.belongsToMany(Tag, {
-  as: 'cart_tag',
+  as: 'tag',
   through: 'cart_has_tag',
   foreignKey: 'cart_id',
   otherKey: 'tag_id',
@@ -175,7 +175,7 @@ Cart.belongsToMany(Tag, {
 });
 // un tag peut etre sur plusieurs carte
 Tag.belongsToMany(Cart, {
-  as: 'tag_cart',
+  as: 'cart',
   through: 'cart_has_tag',
   otherKey: 'cart_id',
   foreignKey: 'tag_id',

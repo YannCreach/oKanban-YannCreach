@@ -1,8 +1,15 @@
 const assert = require('assert');
 const entityDefinition = require('./entityDefinition');
 const entities = ['cart', 'color', 'kanban', 'list', 'role', 'status', 'tag', 'utilisateur'];
+// const models = require('../models');
+
+//   const getModelFromEntity = (entity) => {
+//     const modelName = entity[0].toUpperCase() + entity.slice(1, -1);
+//     return models[modelName];
+//   },
 
 const factoController = {
+
 
   getAll: async (req, res) => {
     const entity = req.params.entity.toLowerCase();
@@ -10,12 +17,8 @@ const factoController = {
     const {sequelizeObject, includes} = entityDefinition.switcher(entity);
 
     try {
-      const getAllByEntity = await sequelizeObject.findAll({
-        include: includes
-      });
-
+      const getAllByEntity = await sequelizeObject.findAll({ include: includes });
       res.json(getAllByEntity);
-
     } catch (error) {
       console.trace(error);
       res.status(500).json(error.toString());
@@ -30,12 +33,8 @@ const factoController = {
     const {sequelizeObject, includes} = entityDefinition.switcher(entity);
 
     try {
-      const getOneByEntity = await sequelizeObject.findByPk(id, {
-        include: includes
-      });
-
+      const getOneByEntity = await sequelizeObject.findByPk(id, { include: includes });
       res.json(getOneByEntity);
-
     } catch (error) {
       console.trace(error);
       res.status(500).json(error.toString());
@@ -47,23 +46,11 @@ const factoController = {
     assert.ok(entities.includes(entity) , 'enter a valid entity');
     const id = req.params.id;
     assert.ok(Number(id), 'enter a valid id');
-    const {sequelizeObject, columns} = entityDefinition.switcher(entity);
+    const {sequelizeObject, includes} = entityDefinition.switcher(entity);
 
     try {
-      //todo rename entity to entityToUpdate
-      const entity = await sequelizeObject.findByPk(id);
-      assert.ok(entity, 'enter a valid id');
-
-      Object.keys(entity.dataValues).forEach((key, index) => {
-        if (Object.keys(req.body).includes(columns[index])) {
-          entity[key] = req.body[key];
-        }
-      });
-
-      await entity.save();
-
-      res.json(entity);
-
+      await sequelizeObject.update( req.body, { where: {id}})
+      res.json( await sequelizeObject.findByPk(id, { include: includes }) );
     } catch (error) {
       console.trace(error);
       res.status(500).json(error.toString());
@@ -82,9 +69,7 @@ const factoController = {
 
     try {
       const newEntity = await sequelizeObject.create( req.body );
-
       res.json(newEntity);
-
     } catch (error) {
       console.trace(error);
       res.status(500).json(error.toString());
@@ -99,11 +84,12 @@ const factoController = {
     const {sequelizeObject} = entityDefinition.switcher(entity);
 
     try {
-      const entityToDelete = await sequelizeObject.findByPk(id);
-      await entityToDelete.destroy();
-
-      res.json({ status: `${entity} > ${id} : correctly deleted` });
-
+      const result = await sequelizeObject.destroy({ where: {id} });
+      if (result) {
+        res.json({ status: `[${entity}][${id}] correctly deleted` })
+      } else {
+        res.json({ status: `[${entity}][${id}] doesn't exists` })
+      }
     } catch (error) {
       console.trace(error);
       res.status(500).json(error.toString());
