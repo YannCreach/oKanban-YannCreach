@@ -8,7 +8,7 @@ const entityDefinition = {
     switch (entityName) {
     case 'cart':
       sequelizeObject = Cart;
-      includes = ['cart_tag', 'cart_color', 'cart_status'];
+      includes = ['tag', 'cart_color', 'cart_status'];
       mandatory = ['name', 'list_id'];
       break;
 
@@ -44,7 +44,7 @@ const entityDefinition = {
 
     case 'tag':
       sequelizeObject = Tag;
-      includes = ['tag_list', 'tag_cart'];
+      includes = ['list', 'cart'];
       mandatory = ['name'];
       break;
 
