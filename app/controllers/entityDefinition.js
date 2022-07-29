@@ -24,9 +24,10 @@ const entityDefinition = {
       mandatory = ['owner_id', 'name'];
       break;
 
+
     case 'list':
       sequelizeObject = List;
-      includes = ['tag', 'list_color', 'list_status'];
+      includes = ['tag', 'list_color', 'list_status', 'list_cart', {model: Cart, as: 'list_cart', include: ['tag', 'cart_color', 'cart_status']}];
       mandatory = ['kanban_id', 'name'];
       break;
 

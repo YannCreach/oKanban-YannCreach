@@ -1,9 +1,14 @@
 const express = require('express');
+const path = require('path');
 const factoController = require('./controllers/factoController');
 const assocController = require('./controllers/assocController');
 
-
 const router = express.Router();
+
+router.get('/', (req, res) => {
+	let filePath = path.join(__dirname, '../index.html');
+	res.sendFile(filePath);
+});
 
 router.get('/api/:entity', factoController.getAll);
 // get all list from kanban id (ou all avec un where ?)
